@@ -1,4 +1,4 @@
-package com.library.Utils;
+package com.cydeo.Utils;
 
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -19,14 +19,14 @@ public class BrowserUtil {
      * @param targetTitle
      */
     public static void switchToWindow(String targetTitle) {
-        String origin = Driver.getDriver().getWindowHandle();
-        for (String handle : Driver.getDriver().getWindowHandles()) {
-            Driver.getDriver().switchTo().window(handle);
-            if (Driver.getDriver().getTitle().equals(targetTitle)) {
+        String origin = com.cydeo.Utils.Driver.getDriver().getWindowHandle();
+        for (String handle : com.cydeo.Utils.Driver.getDriver().getWindowHandles()) {
+            com.cydeo.Utils.Driver.getDriver().switchTo().window(handle);
+            if (com.cydeo.Utils.Driver.getDriver().getTitle().equals(targetTitle)) {
                 return;
             }
         }
-        Driver.getDriver().switchTo().window(origin);
+        com.cydeo.Utils.Driver.getDriver().switchTo().window(origin);
     }
 
     /**
@@ -35,7 +35,7 @@ public class BrowserUtil {
      * @param element on which to hover
      */
     public static void hover(WebElement element) {
-        Actions actions = new Actions(Driver.getDriver());
+        Actions actions = new Actions(com.cydeo.Utils.Driver.getDriver());
         actions.moveToElement(element).perform();
     }
 
@@ -61,7 +61,7 @@ public class BrowserUtil {
      */
     public static List<String> getElementsText(By locator) {
 
-        List<WebElement> elems = Driver.getDriver().findElements(locator);
+        List<WebElement> elems = com.cydeo.Utils.Driver.getDriver().findElements(locator);
         List<String> elemTexts = new ArrayList<>();
 
         for (WebElement el : elems) {
@@ -91,7 +91,7 @@ public class BrowserUtil {
      * @return
      */
     public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeToWaitInSec);
+        WebDriverWait wait = new WebDriverWait(com.cydeo.Utils.Driver.getDriver(), timeToWaitInSec);
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -103,7 +103,7 @@ public class BrowserUtil {
      * @return
      */
     public static WebElement waitForVisibility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeout);
+        WebDriverWait wait = new WebDriverWait(com.cydeo.Utils.Driver.getDriver(), timeout);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -115,7 +115,7 @@ public class BrowserUtil {
      * @return
      */
     public static WebElement waitForClickablility(WebElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeout);
+        WebDriverWait wait = new WebDriverWait(com.cydeo.Utils.Driver.getDriver(), timeout);
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
@@ -127,7 +127,7 @@ public class BrowserUtil {
      * @return
      */
     public static WebElement waitForClickablility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeout);
+        WebDriverWait wait = new WebDriverWait(com.cydeo.Utils.Driver.getDriver(), timeout);
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -143,7 +143,7 @@ public class BrowserUtil {
             }
         };
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOutInSeconds);
+            WebDriverWait wait = new WebDriverWait(com.cydeo.Utils.Driver.getDriver(), timeOutInSeconds);
             wait.until(expectation);
         } catch (Throwable error) {
             error.printStackTrace();
@@ -158,7 +158,7 @@ public class BrowserUtil {
      */
     public static void verifyElementDisplayed(By by) {
         try {
-            Assert.assertTrue("Element not visible: " + by, Driver.getDriver().findElement(by).isDisplayed());
+            Assert.assertTrue("Element not visible: " + by, com.cydeo.Utils.Driver.getDriver().findElement(by).isDisplayed());
         } catch (NoSuchElementException e) {
             e.printStackTrace();
             Assert.fail("Element not found: " + by);
@@ -174,7 +174,7 @@ public class BrowserUtil {
      */
     public static void verifyElementNotDisplayed(By by) {
         try {
-            Assert.assertFalse("Element should not be visible: " + by, Driver.getDriver().findElement(by).isDisplayed());
+            Assert.assertFalse("Element should not be visible: " + by, com.cydeo.Utils.Driver.getDriver().findElement(by).isDisplayed());
         } catch (NoSuchElementException e) {
             e.printStackTrace();
 
@@ -236,8 +236,8 @@ public class BrowserUtil {
      * @param element
      */
     public static void clickWithJS(WebElement element) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
+        ((JavascriptExecutor) com.cydeo.Utils.Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) com.cydeo.Utils.Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
 
 
@@ -247,7 +247,7 @@ public class BrowserUtil {
      * @param element
      */
     public static void scrollToElement(WebElement element) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) com.cydeo.Utils.Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     /**
@@ -256,7 +256,7 @@ public class BrowserUtil {
      * @param element
      */
     public static void doubleClick(WebElement element) {
-        new Actions(Driver.getDriver()).doubleClick(element).build().perform();
+        new Actions(com.cydeo.Utils.Driver.getDriver()).doubleClick(element).build().perform();
     }
 
     /**
@@ -267,7 +267,7 @@ public class BrowserUtil {
      * @param attributeValue
      */
     public static void setAttribute(WebElement element, String attributeName, String attributeValue) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attributeName, attributeValue);
+        ((JavascriptExecutor) com.cydeo.Utils.Driver.getDriver()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attributeName, attributeValue);
     }
 
     /**
@@ -275,9 +275,9 @@ public class BrowserUtil {
      * @param element
      */
     public static void highlight(WebElement element) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+        ((JavascriptExecutor) com.cydeo.Utils.Driver.getDriver()).executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
         waitFor(1);
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].removeAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+        ((JavascriptExecutor) com.cydeo.Utils.Driver.getDriver()).executeScript("arguments[0].removeAttribute('style', 'background: yellow; border: 2px solid red;');", element);
     }
 
     /**
@@ -321,7 +321,7 @@ public class BrowserUtil {
      * @param element
      */
     public static void executeJScommand(WebElement element, String command) {
-        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        JavascriptExecutor jse = (JavascriptExecutor) com.cydeo.Utils.Driver.getDriver();
         jse.executeScript(command, element);
 
     }
@@ -332,7 +332,7 @@ public class BrowserUtil {
      * @param command
      */
     public static void executeJScommand(String command) {
-        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        JavascriptExecutor jse = (JavascriptExecutor) com.cydeo.Utils.Driver.getDriver();
         jse.executeScript(command);
 
     }
@@ -351,7 +351,7 @@ public class BrowserUtil {
         while (counter < attempts) {
             try {
                 //selenium must look for element again
-                clickWithJS(Driver.getDriver().findElement(by));
+                clickWithJS(com.cydeo.Utils.Driver.getDriver().findElement(by));
                 //if click is successful - then break
                 break;
             } catch (WebDriverException e) {
@@ -373,7 +373,7 @@ public class BrowserUtil {
      * @param time
      */
     public static void waitForPresenceOfElement(By by, long time) {
-        new WebDriverWait(Driver.getDriver(), time).until(ExpectedConditions.presenceOfElementLocated(by));
+        new WebDriverWait(com.cydeo.Utils.Driver.getDriver(), time).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
 

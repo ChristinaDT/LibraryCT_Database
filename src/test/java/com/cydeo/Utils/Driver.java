@@ -1,4 +1,4 @@
-package com.library.Utils;
+package com.cydeo.Utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,7 @@ public class Driver {
 
     public static WebDriver getDriver(){
         //read the browser type you want to launch from properties file
-        String browserName= ConfigReader.read("browser");
+        String browserName= com.cydeo.Utils.ConfigReader.read("browser");
 
         if(obj==null) {
             switch (browserName.toLowerCase().trim()) {
