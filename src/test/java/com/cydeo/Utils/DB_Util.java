@@ -23,7 +23,7 @@ public class DB_Util {
     public static void createConnection(String url , String username, String password){
         try {
             con = DriverManager.getConnection(url, username, password) ;
-            System.out.println("CONNECTION SUCCESSFUL");
+
         } catch (Exception e) {
             System.out.println("CONNECTION HAS FAILED " + e.getMessage() );
         }
